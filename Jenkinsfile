@@ -2,7 +2,7 @@ pipeline{
     agent none
     stages{
         stage('Build'){
-            agent slave1
+            agent{label 'slave1'}
             steps{
                 sh 'ls -lrt'
 
@@ -13,7 +13,7 @@ pipeline{
     
         stage('Test'){
             
-            agent slave2
+            agent { label 'slave2'}
         steps{
             echo 'This is testing'
 
