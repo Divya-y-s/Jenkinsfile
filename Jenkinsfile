@@ -12,6 +12,7 @@ pipeline{
         }
     
         stage('Test'){
+            
             agent slave2
         steps{
             echo 'This is testing'
@@ -19,8 +20,10 @@ pipeline{
            }
        }
     stage('Deploy'){
+
+        agent any
         steps{
-            agent any
+            
             echo 'deploying'
 
           }
