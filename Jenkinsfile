@@ -9,11 +9,11 @@ pipeline{
     stages{
         stage('Print'){ 
             steps{
-                echo "App Name": ${env.App_Name}
-                echo "Environment": ${env.ENV}
-                echo "Port": ${env.PORT}
+                echo "App Name: ${env.App_Name}"
+                echo "Environment: ${env.ENV}"
+                echo "Port: ${env.PORT}"
             }
-            
+
 
 
         }
