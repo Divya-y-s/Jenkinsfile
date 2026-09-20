@@ -1,35 +1,22 @@
 pipeline{
-    agent none
-    stages{
-        stage('Build'){
-            agent{label 'slave1'}
-            steps{
-                sh 'ls -lrt'
-
-            }
+    agent any
     
+    environment {
+        App_Name = "appName"
+        ENV = "Production"
+        PORT = "8080"
+    }
+    stages{
+        stage('Print'){ 
+            steps{
+                echo "App Name": ${env.App_Name}
+                echo "Environment": ${env.ENV}
+                echo "Port": ${env.PORT}
+            }
+            
+
 
         }
-    
-        stage('Test'){
-            
-            agent { label 'slave2'}
-        steps{
-            echo 'This is testing'
-
-           }
-       }
-    stage('Deploy'){
-
-        agent any
-        steps{
-            
-            echo 'deploying'
-
-          }
-       }
-    
 
     }
-
 }
