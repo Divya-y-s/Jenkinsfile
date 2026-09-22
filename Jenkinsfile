@@ -1,29 +1,19 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-
-        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
-
-        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
-
-        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
-
-        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+    triggers {
+        pollSCM('H */2 * * *')
     }
+
     stages {
-        stage('Example') {
+        stage("Git Checkout") {
             steps {
-                echo "Hello ${params.PERSON}"
-
-                echo "Biography: ${params.BIOGRAPHY}"
-
-                echo "Toggle: ${params.TOGGLE}"
-
-                echo "Choice: ${params.CHOICE}"
-
-                echo "Password: ${params.PASSWORD}"
+                git (branches: [[name: '*/main']],
+                 extensions: [],
+                 userRemoteConfigs: [[credentialsId: 'ac782aa4-af92-41d4-8c98-182070727806',
+                 url: 'https://github.com/Divya-y-s/private_repo.git']])
             }
-        }
     }
+        
+}
+
 }
